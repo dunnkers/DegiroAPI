@@ -67,7 +67,7 @@ class DeGiro:
 
     def logout(self):
         logout_payload = {
-            'intAccount': self.client_info.account_id,
+            'intAccount': str(self.client_info.account_id),
             'sessionId': self.session_id,
         }
         self.__request(DeGiro.__LOGOUT_URL + ';jsessionid=' + self.session_id, None, logout_payload,
@@ -109,7 +109,7 @@ class DeGiro:
             'searchText': search_text,
             'limit': limit,
             'offset': 0,
-            'intAccount': self.client_info.account_id,
+            'intAccount': str(self.client_info.account_id),
             'sessionId': self.session_id
         }
         return self.__request(DeGiro.__PRODUCT_SEARCH_URL, None, product_search_payload,
@@ -131,7 +131,7 @@ class DeGiro:
             'fromDate': from_date.strftime('%d/%m/%Y'),
             'toDate': to_date.strftime('%d/%m/%Y'),
             'group_transactions_by_order': group_transactions,
-            'intAccount': self.client_info.account_id,
+            'intAccount': str(self.client_info.account_id),
             'sessionId': self.session_id
         }
         return self.__request(DeGiro.__TRANSACTIONS_URL, None, transactions_payload,
@@ -141,7 +141,7 @@ class DeGiro:
         orders_payload = {
             'fromDate': from_date.strftime('%d/%m/%Y'),
             'toDate': to_date.strftime('%d/%m/%Y'),
-            'intAccount': self.client_info.account_id,
+            'intAccount': str(self.client_info.account_id),
             'sessionId': self.session_id
         }
         # max 90 days
@@ -159,7 +159,7 @@ class DeGiro:
 
     def delete_order(self, orderId):
         delete_order_params = {
-            'intAccount': self.client_info.account_id,
+            'intAccount': str(self.client_info.account_id),
             'sessionId': self.session_id,
         }
 
@@ -247,7 +247,7 @@ class DeGiro:
 
     def buyorder(self, orderType, productId, timeType, size, limit=None, stop_loss=None):
         place_buy_order_params = {
-            'intAccount': self.client_info.account_id,
+            'intAccount': str(self.client_info.account_id),
             'sessionId': self.session_id,
         }
         place_buy_order_payload = {
@@ -280,7 +280,7 @@ class DeGiro:
 
     def sellorder(self, orderType, productId, timeType, size, limit=None, stop_loss=None):
         place_sell_order_params = {
-            'intAccount': self.client_info.account_id,
+            'intAccount': str(self.client_info.account_id),
             'sessionId': self.session_id,
         }
         place_sell_order_payload = {
@@ -320,7 +320,7 @@ class DeGiro:
             'requireTotal': "true",
             'sortColumns': "name",
             'sortTypes': "asc",
-            'intAccount': self.client_info.account_id,
+            'intAccount': str(self.client_info.account_id),
             'sessionId': self.session_id
         }
         return \
