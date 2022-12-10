@@ -76,19 +76,23 @@ class DeGiro:
     @staticmethod
     def __request(url, cookie=None, payload=None, headers=None, data=None, post_params=None, request_type=__GET_REQUEST,
                   error_message='An error occurred.'):
+        headers = {
+            **headers,
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
+        }
 
         if request_type == DeGiro.__DELETE_REQUEST:
-            response = requests.delete(url, json=payload)
+            response = requests.delete(url, json=payload, headers=headers)
         elif request_type == DeGiro.__GET_REQUEST and cookie:
-            response = requests.get(url, cookies=cookie)
+            response = requests.get(url, cookies=cookie, headers=headers)
         elif request_type == DeGiro.__GET_REQUEST:
-            response = requests.get(url, params=payload)
+            response = requests.get(url, params=payload, headers=headers)
         elif request_type == DeGiro.__POST_REQUEST and headers and data:
             response = requests.post(url, headers=headers, params=payload, data=data)
         elif request_type == DeGiro.__POST_REQUEST and post_params:
-            response = requests.post(url, params=post_params, json=payload)
+            response = requests.post(url, params=post_params, json=payload, headers=headers)
         elif request_type == DeGiro.__POST_REQUEST:
-            response = requests.post(url, json=payload)
+            response = requests.post(url, json=payload, headers=headers)
         else:
             raise Exception(f'Unknown request type: {request_type}')
 
