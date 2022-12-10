@@ -117,7 +117,7 @@ class DeGiro:
 
     def product_info(self, product_id):
         product_info_payload = {
-            'intAccount': self.client_info.account_id,
+            'intAccount': str(self.client_info.account_id),
             'sessionId': self.session_id
         }
         return self.__request(DeGiro.__PRODUCT_INFO_URL, None, product_info_payload,
